@@ -4,8 +4,7 @@ import "./core/extension_methods/Moment";
 import express from "express";
 import { serverPort } from "./config";
 import { handleError } from "error-api.hl";
-import { BootsTrapper } from "./core/bootstrapper";
-import { Service } from "./bll/service";
+import { BootsTrapper, Service } from "./moduleManager";
 
 const app = express();
 const bootstrapper = new BootsTrapper();
@@ -14,17 +13,13 @@ const service = new Service(repository);
 
 app.use(express.json());
 
-app.get("/", (req, res) => {
-  res.send("api working");
+app.post("/airlines/busier", async (req, res, next) => {
+  res.send(service.busierAirlineIn(req.body));
 });
 
-app.post("/busier-airline", async (req, res, next) => {
-  const input: { month: number; year: number } = req.body;
-
-  service.busierAirlineIn(input);
+app.post("/airports/movements-count", async (req, res, next) => {
+  res.send(service.movementsCountOnDay(req.body));
 });
-
-app.post("/timepopularity", async (req, res, next) => {});
 
 // Error handling middleware, we delegate the handling to the centralized error handler
 app.use(async (err: Error, req, res, next) => {
