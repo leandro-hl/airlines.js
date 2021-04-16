@@ -1,3 +1,3 @@
-import { Identifiable } from "../../core/identifiable";
+import { Identifiable } from "../../moduleManager";
 
 export class Plane extends Identifiable {}

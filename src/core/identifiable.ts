@@ -1,4 +1,4 @@
-import { IdGenerator } from "./identifierGenerator";
+import { IdGenerator } from "../moduleManager";
 
 export class Identifiable {
   private _id: number;
