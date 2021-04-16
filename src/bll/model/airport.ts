@@ -1,16 +1,41 @@
-import { Identifiable } from "../../core/identifiable";
-import { Flight } from "./flight";
+import { Flight, Identifiable } from "../../moduleManager";
 
 export class Airport extends Identifiable {
-  name: string;
-  city: any;
-  flights: Array<Flight>;
+  private _name: string;
+  private _city: any;
+  private _flights: Array<Flight> = [];
 
-  passengerDeparturesOn(day: Date) {}
+  addFlight(flight: Flight, isArrival: boolean) {
+    if (isArrival) {
+      flight.setArrival(this);
+    } else {
+      flight.setDeparture(this);
+    }
 
-  flightDeparturesOn(day: Date) {}
+    this._flights.push(flight);
 
-  flightArrivalsOn(day: Date) {}
+    return this;
+  }
 
-  passengerArrivalsOn(day: Date) {}
+  getMovementsCountOn(day: Date) {
+    const departuresCount = this._flights
+      .filter((x) => x.getDeparture()?.getId() == this.getId())
+      .filter((x) => x.getDepartureDate().getTime() == day.getTime()).length;
+
+    const arrivalsCount = this._flights
+      .filter((x) => x.getArrival()?.getId() == this.getId())
+      .filter((x) => x.getArrivalDate().getTime() == day.getTime()).length;
+
+    return {
+      id: this.getId(),
+      departuresCount,
+      arrivalsCount,
+    };
+  }
+
+  getArrivalsCountOn(day: Date) {}
+
+  getPassengerDeparturesCountOn(day: Date) {}
+
+  getPassengerArrivalsCountOn(day: Date) {}
 }

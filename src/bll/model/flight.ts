@@ -1,20 +1,30 @@
-import { Identifiable } from "../../core/identifiable";
-import { Airport } from "./airport";
-import { Passenger } from "./passenger";
-import { Plane } from "./plane";
+import { Airport, Identifiable, Passenger, Plane } from "../../moduleManager";
 
 export class Flight extends Identifiable {
-  private _departure: Airport;
-  private _arrival: Airport;
-  private _estimatedTimeInMinutes: number;
-  private _offeredSeats: number;
-  private _plane: Plane;
+  private _estimatedTimeInMinutes?: number;
+  private _offeredSeats?: number;
+  private _plane?: Plane;
+  private _departure?: Airport;
+  private _arrival?: Airport;
 
   constructor(
-    private _departureDate: Date,
-    private _passengers: Array<Passenger>
+    private _departureDate?: Date,
+    private _arrivalDate?: Date,
+    private _passengers?: Array<Passenger>
   ) {
     super();
+  }
+
+  setDeparture(departure: Airport) {
+    this._departure = departure;
+
+    return this;
+  }
+
+  setArrival(arrival: Airport) {
+    this._arrival = arrival;
+
+    return this;
   }
 
   duration() {}
@@ -25,6 +35,10 @@ export class Flight extends Identifiable {
 
   getDepartureDate(): Date {
     return this._departureDate;
+  }
+
+  getArrivalDate(): Date {
+    return this._arrivalDate;
   }
 
   getDeparture() {

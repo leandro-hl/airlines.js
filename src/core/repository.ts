@@ -1,9 +1,26 @@
-import { Registry } from "../bll/model/registry";
+import { AirlinesRegistry, AirportsRegistry } from "../moduleManager";
 
 export class Repository {
-  registry: Registry;
+  private _airlinesRegistry: AirlinesRegistry;
+  private _airportRegistry: AirportsRegistry;
 
-  getRegistry() {
-    return this.registry;
+  setAirlinesRegistry(reg: AirlinesRegistry) {
+    this._airlinesRegistry = reg;
+
+    return this;
+  }
+
+  setAirportsRegistry(reg: AirportsRegistry) {
+    this._airportRegistry = reg;
+
+    return this;
+  }
+
+  getAirlinesRegistry() {
+    return this._airlinesRegistry;
+  }
+
+  getAirportsRegistry() {
+    return this._airportRegistry;
   }
 }
