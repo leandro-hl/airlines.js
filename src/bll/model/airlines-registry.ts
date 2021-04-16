@@ -1,6 +1,6 @@
-import { Airline } from "./airline";
+import { Airline } from "../../moduleManager";
 
-export class Registry {
+export class AirlinesRegistry {
   constructor(private _airlines: Array<Airline>) {}
 
   getBusierAirlineIn(month: number, year: number): Airline {
