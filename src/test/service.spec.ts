@@ -25,21 +25,34 @@ describe("service", () => {
 
       const pass1Flight11 = new Passenger();
       const pass2Flight11 = new Passenger();
-      const flight11 = new Flight(new Date(), new Date(), [
-        pass1Flight11,
-        pass2Flight11,
-      ]);
+      const flight11 = new Flight({
+        departureDate: new Date(),
+        arrivalDate: new Date(),
+        passengers: [pass1Flight11, pass2Flight11],
+      });
 
       const pass1Flight12 = new Passenger();
-      const flight12 = new Flight(new Date(), new Date(), [pass1Flight12]);
+      const flight12 = new Flight({
+        departureDate: new Date(),
+        arrivalDate: new Date(),
+        passengers: [pass1Flight12],
+      });
 
       const pass2Flight13 = new Passenger();
-      const flight13 = new Flight(new Date(), new Date(), [pass2Flight13]);
+      const flight13 = new Flight({
+        departureDate: new Date(),
+        arrivalDate: new Date(),
+        passengers: [pass2Flight13],
+      });
 
       const airline1 = new Airline([flight11, flight12, flight13]);
 
       const pass1Flight21 = new Passenger();
-      const flight21 = new Flight(new Date(), new Date(), [pass1Flight21]);
+      const flight21 = new Flight({
+        departureDate: new Date(),
+        arrivalDate: new Date(),
+        passengers: [pass1Flight21],
+      });
 
       const airline2 = new Airline([flight21]);
 
@@ -64,16 +77,65 @@ describe("service", () => {
 
       //arrivals
       airport1
-        .addFlight(new Flight(new Date(), day, []), true)
-        .addFlight(new Flight(new Date(), day, []), true)
-        .addFlight(new Flight(new Date(), day, []), true)
-        .addFlight(new Flight(new Date(), new Date(), []), true);
+        .addFlight(
+          new Flight({
+            departureDate: new Date(),
+            arrivalDate: day,
+            passengers: [],
+          }),
+          true
+        )
+        .addFlight(
+          new Flight({
+            departureDate: new Date(),
+            arrivalDate: day,
+            passengers: [],
+          }),
+          true
+        )
+        .addFlight(
+          new Flight({
+            departureDate: new Date(),
+            arrivalDate: day,
+            passengers: [],
+          }),
+          true
+        )
+        .addFlight(
+          new Flight({
+            departureDate: new Date(),
+            arrivalDate: new Date(),
+            passengers: [],
+          }),
+          true
+        );
 
       //departures
       airport1
-        .addFlight(new Flight(day, new Date(), []), false)
-        .addFlight(new Flight(day, new Date(), []), false)
-        .addFlight(new Flight(new Date(), new Date(), []), false);
+        .addFlight(
+          new Flight({
+            departureDate: day,
+            arrivalDate: new Date(),
+            passengers: [],
+          }),
+          false
+        )
+        .addFlight(
+          new Flight({
+            departureDate: day,
+            arrivalDate: new Date(),
+            passengers: [],
+          }),
+          false
+        )
+        .addFlight(
+          new Flight({
+            departureDate: new Date(),
+            arrivalDate: new Date(),
+            passengers: [],
+          }),
+          false
+        );
 
       const airportsRegistry = new AirportsRegistry([airport1, airport2]);
 
@@ -101,28 +163,42 @@ describe("service", () => {
 
       const pass1Flight11 = new Passenger();
       const pass2Flight11 = new Passenger();
-      const flight11 = new Flight(correctDate, new Date(), [
-        pass1Flight11,
-        pass2Flight11,
-      ]);
+      const flight11 = new Flight({
+        departureDate: correctDate,
+        arrivalDate: new Date(),
+        passengers: [pass1Flight11, pass2Flight11],
+      });
 
       const pass1Flight12 = new Passenger();
-      const flight12 = new Flight(correctDate, new Date(), [pass1Flight12]);
+      const flight12 = new Flight({
+        departureDate: correctDate,
+        arrivalDate: new Date(),
+        passengers: [pass1Flight12],
+      });
 
       const pass1Flight13 = new Passenger();
       const pass2Flight13 = new Passenger();
-      const flight13 = new Flight(incorrectDate, new Date(), [
-        pass1Flight13,
-        pass2Flight13,
-      ]);
+      const flight13 = new Flight({
+        departureDate: incorrectDate,
+        arrivalDate: new Date(),
+        passengers: [pass1Flight13, pass2Flight13],
+      });
 
       const airline1 = new Airline([flight11, flight12, flight13]);
 
       const pass1Flight21 = new Passenger();
-      const flight21 = new Flight(correctDate, new Date(), [pass1Flight21]);
+      const flight21 = new Flight({
+        departureDate: correctDate,
+        arrivalDate: new Date(),
+        passengers: [pass1Flight21],
+      });
 
       const pass1Flight22 = new Passenger();
-      const flight22 = new Flight(correctDate, new Date(), [pass1Flight22]);
+      const flight22 = new Flight({
+        departureDate: correctDate,
+        arrivalDate: new Date(),
+        passengers: [pass1Flight22],
+      });
 
       const airline2 = new Airline([flight21, flight22]);
 

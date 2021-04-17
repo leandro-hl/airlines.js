@@ -2,17 +2,26 @@ import { Airport, Identifiable, Passenger, Plane } from "../../moduleManager";
 
 export class Flight extends Identifiable {
   private _estimatedTimeInMinutes?: number;
-  private _offeredSeats?: number;
+  private _seats?: number;
   private _plane?: Plane;
   private _departure?: Airport;
   private _arrival?: Airport;
+  private _departureDate?: Date;
+  private _arrivalDate?: Date;
+  private _passengers?: Array<Passenger>;
 
-  constructor(
-    private _departureDate?: Date,
-    private _arrivalDate?: Date,
-    private _passengers?: Array<Passenger>
-  ) {
+  constructor(p: {
+    departureDate?: Date;
+    arrivalDate?: Date;
+    passengers?: Array<Passenger>;
+    seats?: number;
+  }) {
     super();
+
+    this._departureDate = p.departureDate;
+    this._arrivalDate = p.arrivalDate;
+    this._passengers = p.passengers;
+    this._seats = p.seats;
   }
 
   setDeparture(departure: Airport) {
@@ -31,6 +40,10 @@ export class Flight extends Identifiable {
 
   getPassengersCount() {
     return this._passengers.length;
+  }
+
+  getOccupiedCapacity() {
+    return this._passengers.length / this._seats;
   }
 
   getDepartureDate(): Date {
