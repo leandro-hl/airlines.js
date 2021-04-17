@@ -43,7 +43,7 @@ export class Flight extends Identifiable {
   }
 
   getOccupiedCapacity() {
-    return this._passengers.length / this._seats;
+    return `${(this._passengers.length / this._seats) * 100}%`;
   }
 
   getDepartureDate(): Date {

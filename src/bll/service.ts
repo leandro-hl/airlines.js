@@ -16,11 +16,11 @@ export class Service {
       .getMovementsCountOn(input.day);
   }
 
-  passengersCountBy(flightId: number) {
+  flightOccupiedCapacity(flightId: number) {
     return this._rep
       .getAirlinesRegistry()
       .getAirlineBy(flightId)
       .getFlightBy(flightId)
-      .getPassengersCount();
+      .getOccupiedCapacity();
   }
 }
