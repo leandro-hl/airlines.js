@@ -17,6 +17,10 @@ app.post("/airlines/busier", async (req, res, next) => {
   res.send(service.busierAirlineIn(req.body));
 });
 
+app.post("/airlines/flights/passengers/count", async (req, res, next) => {
+  res.send(service.passengersCountBy(req.body));
+});
+
 app.post("/airports/movements-count", async (req, res, next) => {
   res.send(service.movementsCountOnDay(req.body));
 });

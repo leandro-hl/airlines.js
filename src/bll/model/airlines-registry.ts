@@ -24,4 +24,12 @@ export class AirlinesRegistry {
 
     return airlinePassenger[0].airline;
   }
+
+  getAirlines() {
+    return this._airlines;
+  }
+
+  getAirlineBy(flightId: number) {
+    return this._airlines.find((x) => x.hasFlight(flightId));
+  }
 }

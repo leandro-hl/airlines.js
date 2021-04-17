@@ -19,6 +19,41 @@ chai.use(chaiAsPromised);
 
 describe("service", () => {
   describe("airlines registry", () => {
+    it("1. should return passenger count in a flight", () => {
+      //Arrange
+      const flightId = 1;
+
+      const pass1Flight11 = new Passenger();
+      const pass2Flight11 = new Passenger();
+      const flight11 = new Flight(new Date(), new Date(), [
+        pass1Flight11,
+        pass2Flight11,
+      ]);
+
+      const pass1Flight12 = new Passenger();
+      const flight12 = new Flight(new Date(), new Date(), [pass1Flight12]);
+
+      const pass2Flight13 = new Passenger();
+      const flight13 = new Flight(new Date(), new Date(), [pass2Flight13]);
+
+      const airline1 = new Airline([flight11, flight12, flight13]);
+
+      const pass1Flight21 = new Passenger();
+      const flight21 = new Flight(new Date(), new Date(), [pass1Flight21]);
+
+      const airline2 = new Airline([flight21]);
+
+      const registry = new AirlinesRegistry([airline1, airline2]);
+
+      const repository = new Repository().setAirlinesRegistry(registry);
+
+      //Act
+      const result = new Service(repository).passengersCountBy(flightId);
+
+      //Assert
+      expect(result).to.be.equal(flight11.getPassengersCount());
+    });
+
     it("3. should return departures and arrivals counts for an airport and day", () => {
       //Arrange
       const airPortId = 1;

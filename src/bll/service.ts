@@ -15,4 +15,12 @@ export class Service {
       .getAirportBy(input.airPortId)
       .getMovementsCountOn(input.day);
   }
+
+  passengersCountBy(flightId: number) {
+    return this._rep
+      .getAirlinesRegistry()
+      .getAirlineBy(flightId)
+      .getFlightBy(flightId)
+      .getPassengersCount();
+  }
 }

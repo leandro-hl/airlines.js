@@ -10,4 +10,12 @@ export class Airline extends Identifiable {
   getFlights() {
     return this._flights;
   }
+
+  getFlightBy(flightId: number) {
+    return this._flights.find((x) => x.getId() == flightId);
+  }
+
+  hasFlight(flightId: number) {
+    return this.getFlightBy(flightId) != undefined;
+  }
 }
