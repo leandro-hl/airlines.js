@@ -10,7 +10,8 @@
   "scripts": {
     "start": "tsc && node dist/app.js",
     "dev": "nodemon --config nodemon.json --inspect-brk=9230 src/app.ts",
-    "test": "mocha -r ts-node/register ./src/test/*.spec.ts"
+    "test": "mocha -r ts-node/register ./src/test/*.spec.ts",
+    "format": "prettier --write 'src/*.ts'"
   },
   "author": "Leandro Hereñu",
   "license": "ISC",
@@ -36,6 +37,7 @@
     "chai": "^4.3.4",
     "madge": "^4.0.2",
     "mocha": "^8.3.2",
+    "prettier": "2.2.1",
     "ts-node": "^9.1.1",
     "typescript": "^4.2"
   }
