@@ -9,7 +9,7 @@ export class Airport extends Identifiable implements Scale {
   constructor(p?: { estimatedArrivalWaitingTimeInMinutes: number }) {
     super();
 
-    this._estimatedArrivalWaitingTimeInMinutes = p.estimatedArrivalWaitingTimeInMinutes;
+    this._estimatedArrivalWaitingTimeInMinutes = p?.estimatedArrivalWaitingTimeInMinutes;
   }
 
   addFlight(flight: Flight, isArrival: boolean) {

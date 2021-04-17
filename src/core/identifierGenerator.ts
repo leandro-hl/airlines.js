@@ -18,4 +18,10 @@ export class IdGenerator {
       return ++this._flightsEnumerator;
     }
   }
+
+  static restart() {
+    this._airlinesEnumerator = 0;
+    this._airportsEnumerator = 0;
+    this._flightsEnumerator = 0;
+  }
 }

@@ -1,4 +1,5 @@
 import "../core/extension_methods/String";
+import "../core/extension_methods/Number";
 import "../core/extension_methods/Moment";
 
 import { expect } from "chai";
@@ -8,6 +9,7 @@ import {
   Airport,
   AirportsRegistry,
   Flight,
+  IdGenerator,
   Passenger,
   Repository,
   Service
@@ -19,10 +21,12 @@ chai.use(chaiAsPromised);
 
 describe("service", () => {
   describe("airlines registry", () => {
+    beforeEach(() => {
+      IdGenerator.restart();
+    });
+
     it("1. should return occupied capacity in a flight", () => {
       //Arrange
-      const flightId = 1;
-
       const pass1Flight11 = new Passenger();
       const pass2Flight11 = new Passenger();
       const flight11 = new Flight({
@@ -62,10 +66,59 @@ describe("service", () => {
       const repository = new Repository().setAirlinesRegistry(registry);
 
       //Act
-      const result = new Service(repository).flightOccupiedCapacity(flightId);
+      const result = new Service(repository).flightOccupiedCapacity({
+        airlineId: 1,
+        flightId: 1
+      });
 
       //Assert
       expect(result).to.be.equal("20%");
+    });
+
+    it("2. should return estimated flight duration", () => {
+      //Arrange
+      const depHour = 14;
+      const arrHour = 16;
+
+      const departureDate = new Date(2021, 1, 1, depHour);
+      const arrivalDate = new Date(2021, 1, 1, arrHour);
+
+      const scaleWaitingTime1 = 30;
+      const scale1 = new Airport({
+        estimatedArrivalWaitingTimeInMinutes: scaleWaitingTime1
+      });
+
+      const scaleWaitingTime2 = 15;
+      const scale2 = new Airport({
+        estimatedArrivalWaitingTimeInMinutes: scaleWaitingTime2
+      });
+
+      const scaleWaitingTime3 = 131;
+      const scale3 = new Airport({
+        estimatedArrivalWaitingTimeInMinutes: scaleWaitingTime3
+      });
+
+      const flight11 = new Flight({
+        departureDate: departureDate,
+        arrivalDate: arrivalDate
+      });
+
+      flight11.addScale(scale1).addScale(scale2).addScale(scale3);
+
+      const airline1 = new Airline([flight11]);
+
+      const registry = new AirlinesRegistry([airline1]);
+
+      const repository = new Repository().setAirlinesRegistry(registry);
+
+      //Act
+      const result = new Service(repository).estimatedFlightDuration({
+        airlineId: 1,
+        flightId: 1
+      });
+
+      //Assert
+      expect(result).to.be.equal("04:56");
     });
 
     it("3. should return departures and arrivals counts for an airport and day", () => {

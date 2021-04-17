@@ -1,4 +1,5 @@
 import "./core/extension_methods/String";
+import "./core/extension_methods/Number";
 import "./core/extension_methods/Moment";
 
 import express from "express";
