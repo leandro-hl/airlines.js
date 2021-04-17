@@ -1,52 +1,52 @@
 import { Flight, Identifiable, Scale } from "../../moduleManager";
 
 export class Airport extends Identifiable implements Scale {
-  private _name: string;
-  private _city: any;
-  private _flights: Array<Flight> = [];
-  private _estimatedArrivalWaitingTimeInMinutes: number;
+	private _name: string;
+	private _city: any;
+	private _flights: Array<Flight> = [];
+	private _estimatedArrivalWaitingTimeInMinutes: number;
 
-  constructor(p?: { estimatedArrivalWaitingTimeInMinutes: number }) {
-    super();
+	constructor(p?: { estimatedArrivalWaitingTimeInMinutes: number }) {
+		super();
 
-    this._estimatedArrivalWaitingTimeInMinutes = p.estimatedArrivalWaitingTimeInMinutes;
-  }
+		this._estimatedArrivalWaitingTimeInMinutes = p.estimatedArrivalWaitingTimeInMinutes;
+	}
 
-  addFlight(flight: Flight, isArrival: boolean) {
-    if (isArrival) {
-      flight.setArrival(this);
-    } else {
-      flight.setDeparture(this);
-    }
+	addFlight(flight: Flight, isArrival: boolean) {
+		if (isArrival) {
+			flight.setArrival(this);
+		} else {
+			flight.setDeparture(this);
+		}
 
-    this._flights.push(flight);
+		this._flights.push(flight);
 
-    return this;
-  }
+		return this;
+	}
 
-  getEstimatedWaitingTimeInMilliseconds(): number {
-    return this._estimatedArrivalWaitingTimeInMinutes * 60000;
-  }
+	getEstimatedWaitingTimeInMilliseconds(): number {
+		return this._estimatedArrivalWaitingTimeInMinutes * 60000;
+	}
 
-  getMovementsCountOn(day: Date) {
-    const departuresCount = this._flights
-      .filter((x) => x.getDeparture()?.getId() == this.getId())
-      .filter((x) => x.getDepartureDate().getTime() == day.getTime()).length;
+	getMovementsCountOn(day: Date) {
+		const departuresCount = this._flights
+			.filter(x => x.getDeparture()?.getId() == this.getId())
+			.filter(x => x.getDepartureDate().getTime() == day.getTime()).length;
 
-    const arrivalsCount = this._flights
-      .filter((x) => x.getArrival()?.getId() == this.getId())
-      .filter((x) => x.getArrivalDate().getTime() == day.getTime()).length;
+		const arrivalsCount = this._flights
+			.filter(x => x.getArrival()?.getId() == this.getId())
+			.filter(x => x.getArrivalDate().getTime() == day.getTime()).length;
 
-    return {
-      id: this.getId(),
-      departuresCount,
-      arrivalsCount
-    };
-  }
+		return {
+			id: this.getId(),
+			departuresCount,
+			arrivalsCount
+		};
+	}
 
-  getArrivalsCountOn(day: Date) {}
+	getArrivalsCountOn(day: Date) {}
 
-  getPassengerDeparturesCountOn(day: Date) {}
+	getPassengerDeparturesCountOn(day: Date) {}
 
-  getPassengerArrivalsCountOn(day: Date) {}
+	getPassengerArrivalsCountOn(day: Date) {}
 }
