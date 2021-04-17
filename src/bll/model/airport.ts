@@ -4,7 +4,7 @@ export class Airport extends Identifiable implements Scale {
   private _name: string;
   private _city: any;
   private _flights: Array<Flight> = [];
-  private _estimatedArrivalWaitingTimeInMinutes: number;
+  private _estimatedArrivalWaitingTimeInMinutes: number = 0;
 
   constructor(p?: { estimatedArrivalWaitingTimeInMinutes: number }) {
     super();

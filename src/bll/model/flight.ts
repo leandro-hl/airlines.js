@@ -64,7 +64,13 @@ export class Flight extends Identifiable {
   }
 
   getEstimatedDuration() {
-    return this._arrivalDate.getTime() - this._departureDate.getTime() + this._scales;
+    return (
+      this._arrivalDate.getTime() -
+      this._departureDate.getTime() +
+      this._scales
+        .map(x => x.getEstimatedWaitingTimeInMilliseconds())
+        .reduce((sum, time) => (sum += time))
+    );
   }
 
   getDeparture() {

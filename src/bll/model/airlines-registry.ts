@@ -29,7 +29,7 @@ export class AirlinesRegistry {
     return this._airlines;
   }
 
-  getAirlineBy(flightId: number) {
-    return this._airlines.find(x => x.hasFlight(flightId));
+  getAirlineBy(airlineId: number) {
+    return this._airlines.find(x => x.getId() == airlineId);
   }
 }

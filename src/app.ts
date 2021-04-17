@@ -13,16 +13,35 @@ const service = new Service(repository);
 
 app.use(express.json());
 
-app.post("/airlines/busier", async (req, res, next) => {
-  res.send(service.busierAirlineIn(req.body));
+app.post("/airlines/:month/:year/busier", async (req, res, next) => {
+  res.send(service.busierAirlineIn({ month: +req.params.month, year: +req.params.year }));
 });
 
-app.post("/airlines/flights/passengers/count", async (req, res, next) => {
-  res.send(service.passengersCountBy(req.body));
+app.get("/airlines/:airline/flights/:flight/occupation", async (req, res, next) => {
+  res.send(
+    service.flightOccupiedCapacity({
+      airlineId: +req.params.airline,
+      flightId: +req.params.flight
+    })
+  );
 });
 
-app.post("/airports/movements-count", async (req, res, next) => {
-  res.send(service.movementsCountOnDay(req.body));
+app.get("/airlines/:airline/flights/:flight/duration", async (req, res, next) => {
+  res.send(
+    service.estimatedFlightDuration({
+      airlineId: +req.params.airline,
+      flightId: +req.params.flight
+    })
+  );
+});
+
+app.get("/airports/:airport/:date/movements-count", async (req, res, next) => {
+  res.send(
+    service.movementsCountOnDay({
+      airPortId: +req.params.airport,
+      day: new Date(req.params.date)
+    })
+  );
 });
 
 // Error handling middleware, we delegate the handling to the centralized error handler
