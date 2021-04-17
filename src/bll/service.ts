@@ -3,10 +3,19 @@ import { Repository } from "../moduleManager";
 export class Service {
   constructor(private _rep: Repository) {}
 
-  busierAirlineIn(input: { month: number; year: number }) {
+  flightOccupiedCapacity(flightId: number) {
     return this._rep
       .getAirlinesRegistry()
-      .getBusierAirlineIn(input.month, input.year);
+      .getAirlineBy(flightId)
+      .getFlightBy(flightId)
+      .getOccupiedCapacity();
+  }
+
+  estimatedFlightDuration(flightId: number) {
+    return this._rep
+      .getAirlinesRegistry()
+      .getAirlineBy(flightId)
+      .getFlightBy(flightId);
   }
 
   movementsCountOnDay(input: { airPortId: number; day: Date }) {
@@ -16,11 +25,9 @@ export class Service {
       .getMovementsCountOn(input.day);
   }
 
-  flightOccupiedCapacity(flightId: number) {
+  busierAirlineIn(input: { month: number; year: number }) {
     return this._rep
       .getAirlinesRegistry()
-      .getAirlineBy(flightId)
-      .getFlightBy(flightId)
-      .getOccupiedCapacity();
+      .getBusierAirlineIn(input.month, input.year);
   }
 }

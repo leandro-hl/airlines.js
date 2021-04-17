@@ -19,7 +19,7 @@ chai.use(chaiAsPromised);
 
 describe("service", () => {
   describe("airlines registry", () => {
-    it("1. should return passenger count in a flight", () => {
+    it("1. should return occupied capacity in a flight", () => {
       //Arrange
       const flightId = 1;
 
@@ -29,6 +29,7 @@ describe("service", () => {
         departureDate: new Date(),
         arrivalDate: new Date(),
         passengers: [pass1Flight11, pass2Flight11],
+        seats: 10,
       });
 
       const pass1Flight12 = new Passenger();
@@ -61,10 +62,10 @@ describe("service", () => {
       const repository = new Repository().setAirlinesRegistry(registry);
 
       //Act
-      const result = new Service(repository).passengersCountBy(flightId);
+      const result = new Service(repository).flightOccupiedCapacity(flightId);
 
       //Assert
-      expect(result).to.be.equal(flight11.getPassengersCount());
+      expect(result).to.be.equal("20%");
     });
 
     it("3. should return departures and arrivals counts for an airport and day", () => {
