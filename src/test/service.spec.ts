@@ -10,7 +10,7 @@ import {
   Flight,
   Passenger,
   Repository,
-  Service,
+  Service
 } from "../moduleManager";
 
 const chai = require("chai");
@@ -29,21 +29,21 @@ describe("service", () => {
         departureDate: new Date(),
         arrivalDate: new Date(),
         passengers: [pass1Flight11, pass2Flight11],
-        seats: 10,
+        seats: 10
       });
 
       const pass1Flight12 = new Passenger();
       const flight12 = new Flight({
         departureDate: new Date(),
         arrivalDate: new Date(),
-        passengers: [pass1Flight12],
+        passengers: [pass1Flight12]
       });
 
       const pass2Flight13 = new Passenger();
       const flight13 = new Flight({
         departureDate: new Date(),
         arrivalDate: new Date(),
-        passengers: [pass2Flight13],
+        passengers: [pass2Flight13]
       });
 
       const airline1 = new Airline([flight11, flight12, flight13]);
@@ -52,7 +52,7 @@ describe("service", () => {
       const flight21 = new Flight({
         departureDate: new Date(),
         arrivalDate: new Date(),
-        passengers: [pass1Flight21],
+        passengers: [pass1Flight21]
       });
 
       const airline2 = new Airline([flight21]);
@@ -82,7 +82,7 @@ describe("service", () => {
           new Flight({
             departureDate: new Date(),
             arrivalDate: day,
-            passengers: [],
+            passengers: []
           }),
           true
         )
@@ -90,7 +90,7 @@ describe("service", () => {
           new Flight({
             departureDate: new Date(),
             arrivalDate: day,
-            passengers: [],
+            passengers: []
           }),
           true
         )
@@ -98,7 +98,7 @@ describe("service", () => {
           new Flight({
             departureDate: new Date(),
             arrivalDate: day,
-            passengers: [],
+            passengers: []
           }),
           true
         )
@@ -106,7 +106,7 @@ describe("service", () => {
           new Flight({
             departureDate: new Date(),
             arrivalDate: new Date(),
-            passengers: [],
+            passengers: []
           }),
           true
         );
@@ -117,7 +117,7 @@ describe("service", () => {
           new Flight({
             departureDate: day,
             arrivalDate: new Date(),
-            passengers: [],
+            passengers: []
           }),
           false
         )
@@ -125,7 +125,7 @@ describe("service", () => {
           new Flight({
             departureDate: day,
             arrivalDate: new Date(),
-            passengers: [],
+            passengers: []
           }),
           false
         )
@@ -133,7 +133,7 @@ describe("service", () => {
           new Flight({
             departureDate: new Date(),
             arrivalDate: new Date(),
-            passengers: [],
+            passengers: []
           }),
           false
         );
@@ -145,7 +145,7 @@ describe("service", () => {
       //Act
       const result = new Service(repository).movementsCountOnDay({
         airPortId,
-        day,
+        day
       });
 
       //Assert
@@ -167,14 +167,14 @@ describe("service", () => {
       const flight11 = new Flight({
         departureDate: correctDate,
         arrivalDate: new Date(),
-        passengers: [pass1Flight11, pass2Flight11],
+        passengers: [pass1Flight11, pass2Flight11]
       });
 
       const pass1Flight12 = new Passenger();
       const flight12 = new Flight({
         departureDate: correctDate,
         arrivalDate: new Date(),
-        passengers: [pass1Flight12],
+        passengers: [pass1Flight12]
       });
 
       const pass1Flight13 = new Passenger();
@@ -182,7 +182,7 @@ describe("service", () => {
       const flight13 = new Flight({
         departureDate: incorrectDate,
         arrivalDate: new Date(),
-        passengers: [pass1Flight13, pass2Flight13],
+        passengers: [pass1Flight13, pass2Flight13]
       });
 
       const airline1 = new Airline([flight11, flight12, flight13]);
@@ -191,14 +191,14 @@ describe("service", () => {
       const flight21 = new Flight({
         departureDate: correctDate,
         arrivalDate: new Date(),
-        passengers: [pass1Flight21],
+        passengers: [pass1Flight21]
       });
 
       const pass1Flight22 = new Passenger();
       const flight22 = new Flight({
         departureDate: correctDate,
         arrivalDate: new Date(),
-        passengers: [pass1Flight22],
+        passengers: [pass1Flight22]
       });
 
       const airline2 = new Airline([flight21, flight22]);

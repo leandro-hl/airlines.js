@@ -8,6 +8,6 @@ export class AirportsRegistry {
   }
 
   getAirportBy(id: number) {
-    return this._airports.find((x) => x.getId() == id);
+    return this._airports.find(x => x.getId() == id);
   }
 }

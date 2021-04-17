@@ -34,7 +34,7 @@ process.on("uncaughtException", (error: Error) => {
   handleError(error);
 });
 
-process.on("unhandledRejection", (reason) => {
+process.on("unhandledRejection", reason => {
   handleError(reason);
 });
 

@@ -12,6 +12,4 @@ const asyncShouldThrow = async (fn: Function, desc) => {
   }
 };
 
-export {
-    asyncShouldThrow
-}
+export { asyncShouldThrow };

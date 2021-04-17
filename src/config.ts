@@ -1,9 +1,7 @@
-import dotenv from 'dotenv'
+import dotenv from "dotenv";
 
-dotenv.config()
+dotenv.config();
 
-const serverPort = process.env.PORT
+const serverPort = process.env.PORT;
 
-export {
-    serverPort
-}
+export { serverPort };

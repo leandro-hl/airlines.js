@@ -12,10 +12,7 @@ export class Service {
   }
 
   estimatedFlightDuration(flightId: number) {
-    return this._rep
-      .getAirlinesRegistry()
-      .getAirlineBy(flightId)
-      .getFlightBy(flightId);
+    return this._rep.getAirlinesRegistry().getAirlineBy(flightId).getFlightBy(flightId);
   }
 
   movementsCountOnDay(input: { airPortId: number; day: Date }) {
@@ -26,8 +23,6 @@ export class Service {
   }
 
   busierAirlineIn(input: { month: number; year: number }) {
-    return this._rep
-      .getAirlinesRegistry()
-      .getBusierAirlineIn(input.month, input.year);
+    return this._rep.getAirlinesRegistry().getBusierAirlineIn(input.month, input.year);
   }
 }

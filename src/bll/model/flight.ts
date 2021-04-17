@@ -1,10 +1,4 @@
-import {
-  Airport,
-  Identifiable,
-  Passenger,
-  Plane,
-  Scale,
-} from "../../moduleManager";
+import { Airport, Identifiable, Passenger, Plane, Scale } from "../../moduleManager";
 
 export class Flight extends Identifiable {
   private _seats?: number;
@@ -70,9 +64,7 @@ export class Flight extends Identifiable {
   }
 
   getEstimatedDuration() {
-    return (
-      this._arrivalDate.getTime() - this._departureDate.getTime() + this._scales
-    );
+    return this._arrivalDate.getTime() - this._departureDate.getTime() + this._scales;
   }
 
   getDeparture() {

@@ -1,12 +1,11 @@
 declare global {
   interface String {
-      getRegions(): string[];
+    getRegions(): string[];
   }
 }
 
-String.prototype.getRegions = function(this: string) {
-  return this.split('/');
+String.prototype.getRegions = function (this: string) {
+  return this.split("/");
 };
 
 export {};
-  
