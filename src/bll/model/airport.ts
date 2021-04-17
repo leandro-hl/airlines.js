@@ -1,9 +1,16 @@
-import { Flight, Identifiable } from "../../moduleManager";
+import { Flight, Identifiable, Scale } from "../../moduleManager";
 
-export class Airport extends Identifiable {
+export class Airport extends Identifiable implements Scale {
   private _name: string;
   private _city: any;
   private _flights: Array<Flight> = [];
+  private _estimatedArrivalWaitingTimeInMinutes: number;
+
+  constructor(p?: { estimatedArrivalWaitingTimeInMinutes: number }) {
+    super();
+
+    this._estimatedArrivalWaitingTimeInMinutes = p.estimatedArrivalWaitingTimeInMinutes;
+  }
 
   addFlight(flight: Flight, isArrival: boolean) {
     if (isArrival) {
@@ -15,6 +22,10 @@ export class Airport extends Identifiable {
     this._flights.push(flight);
 
     return this;
+  }
+
+  getEstimatedWaitingTimeInMilliseconds(): number {
+    return this._estimatedArrivalWaitingTimeInMinutes * 60000;
   }
 
   getMovementsCountOn(day: Date) {
@@ -29,7 +40,7 @@ export class Airport extends Identifiable {
     return {
       id: this.getId(),
       departuresCount,
-      arrivalsCount,
+      arrivalsCount
     };
   }
 

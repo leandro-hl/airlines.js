@@ -9,6 +9,7 @@ export * from "./bll/model/plane";
 export * from "./bll/model/flight";
 
 export * from "./bll/model/airport";
+export * from "./bll/model/scale";
 export * from "./bll/model/airports-registry";
 
 export * from "./core/identifierGenerator";
