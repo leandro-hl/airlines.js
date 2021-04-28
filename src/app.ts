@@ -16,6 +16,10 @@ const service = new Service(repository);
 
 app.use(express.json());
 
+app.get("/", (req, res, next) => {
+  res.send("I'm fucking alive");
+});
+
 app.post("/airlines/:month/:year/busier", async (req, res, next) => {
   res.send(service.busierAirlineIn({ month: +req.params.month, year: +req.params.year }));
 });
