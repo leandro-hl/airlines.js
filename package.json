@@ -14,7 +14,9 @@
   },
   "homepage": "https://github.com/LeanHer94/airlines.js#readme",
   "scripts": {
-    "start": "tsc && node dist/app.js",
+    "start-1": "tsc && node dist/app.js",
+    "start": "node dist/app.js",
+    "postinstall": "tsc",
     "dev": "nodemon --config nodemon.json --inspect-brk=9230 src/app.ts",
     "test": "mocha -r ts-node/register ./src/test/*.spec.ts",
     "format": "prettier --write ./src/**/*.ts"
