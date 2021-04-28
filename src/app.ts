@@ -9,6 +9,8 @@ import { BootsTrapper, Service } from "./moduleManager";
 
 const app = express();
 const bootstrapper = new BootsTrapper();
+
+// One repo and service for all endpoints. Race condition?
 const repository = bootstrapper.createRepository();
 const service = new Service(repository);
 
