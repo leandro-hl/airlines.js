@@ -72,7 +72,7 @@ describe("service", () => {
       });
 
       //Assert
-      expect(result).to.be.equal("30%");
+      expect(result).to.be.equal("20%");
     });
 
     it("2. should return estimated flight duration", () => {
