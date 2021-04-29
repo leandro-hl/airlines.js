@@ -16,7 +16,6 @@
   "scripts": {
     "build": "tsc --build",
     "start": "node dist/app.js",
-    "postinstall": "tsc",
     "dev": "nodemon --config nodemon.json --inspect-brk=9230 src/app.ts",
     "test": "mocha -r ts-node/register ./src/test/*.spec.ts",
     "format": "prettier --write ./src/**/*.ts"
