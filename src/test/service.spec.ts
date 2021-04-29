@@ -71,7 +71,7 @@ describe("service", () => {
         flightId: 1
       });
 
-      //Assert
+      //Asserts
       expect(result).to.be.equal("20%");
     });
 
