@@ -3,7 +3,7 @@ import "./core/extension_methods/Number";
 import "./core/extension_methods/Moment";
 
 import express from "express";
-import { serverPort } from "./config";
+import { host, port as port } from "./config";
 import { handleError } from "error-api.hl";
 import { BootsTrapper, Service } from "./moduleManager";
 
@@ -18,6 +18,10 @@ app.use(express.json());
 
 app.get("/", (req, res, next) => {
   res.send("I'm fucking alive");
+});
+
+app.get("/test", (req, res, next) => {
+  res.send("Test if this really works");
 });
 
 app.post("/airlines/:month/:year/busier", async (req, res, next) => {
@@ -64,6 +68,6 @@ process.on("unhandledRejection", reason => {
   handleError(reason);
 });
 
-app.listen(serverPort, () => {
-  console.log(`Example app listening at http://localhost:${serverPort}`);
+app.listen(port, () => {
+  console.log(`App listening at ${host}:${port}`);
 });
