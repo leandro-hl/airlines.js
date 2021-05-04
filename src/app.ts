@@ -6,7 +6,11 @@ import express from "express";
 import { host, port as port } from "./config";
 import { handleError } from "error-api.hl";
 import { BootsTrapper, Service } from "./moduleManager";
-import airlines from "./routes/airlines";
+import { generateRestAPI } from "./routes/rest-api";
+import { AirportsRestService } from "./bll/airports-rest-service";
+import { AirlinesRestService } from "./bll/airlines-rest-service";
+import { FlightsRestService } from "./bll/flights-rest-service";
+import { PlanesRestService } from "./bll/planes-rest-service";
 
 const app = express();
 const bootstrapper = new BootsTrapper();
@@ -30,7 +34,10 @@ app.get("/", (req, res, next) => {
   res.send("I'm fucking alive");
 });
 
-app.use("/airlines", airlines);
+app.use("/airports", generateRestAPI(new AirportsRestService()));
+app.use("/airlines", generateRestAPI(new AirlinesRestService()));
+app.use("/flights", generateRestAPI(new FlightsRestService()));
+app.use("/planes", generateRestAPI(new PlanesRestService()));
 
 // app.post("/airlines/:month/:year/busier", (req, res, next) => {
 //   res.send(service.busierAirlineIn({ month: +req.params.month, year: +req.params.year }));
