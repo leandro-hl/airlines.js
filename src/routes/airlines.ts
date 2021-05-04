@@ -2,31 +2,46 @@ import express from "express";
 
 const airlines = express.Router();
 
-airlines.get("/", (req, res, next) => {
-  type Airline = {
-    id: number;
-    name: string;
-  };
-
-  const airlines: Airline[] = [];
-
-  for (let i = 0; i < 10; i++) {
-    airlines.push({ id: i, name: i.toString() });
-  }
-
-  res.send(airlines);
-});
+type Airline = {
+  id: number;
+  name: string;
+};
 
 airlines
-  .route("/:airline")
+  .route("/")
   .get((req, res, next) => {
-    res.send("airline get");
-  })
-  .put((req, res, next) => {
-    res.send("airline put");
+    const airlines: Airline[] = [];
+
+    for (let i = 0; i < 10; i++) {
+      airlines.push({ id: i, name: i.toString() });
+    }
+
+    res.send(airlines);
   })
   .post((req, res, next) => {
-    res.send("airline post");
+    const airline = {
+      name: req.body.name,
+      id: 15
+    };
+    res.send({ id: airline.id });
+  });
+
+airlines
+  .route("/:id")
+  .get((req, res, next) => {
+    const airline = {
+      id: req.params.id,
+      name: req.params.id.toString()
+    };
+
+    res.send(airline);
+  })
+  .put((req, res, next) => {
+    const airline = {
+      name: req.body.name,
+      id: 15
+    };
+    res.send({ id: airline.id });
   });
 
 export default airlines;
