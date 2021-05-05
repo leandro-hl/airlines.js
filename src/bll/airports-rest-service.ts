@@ -1,16 +1,19 @@
+import { Repository, Airport } from "../moduleManager";
 import { RestService } from "./rest-service";
 
 export class AirportsRestService implements RestService<any> {
+  constructor(private _rep: Repository) {}
+
   getAll() {
-    throw new Error("Method not implemented.");
+    return this._rep.getAirports().getAll();
   }
   get(id: number) {
-    throw new Error("Method not implemented.");
+    return this._rep.getAirports().getDTOBy(id);
   }
   post(item: any) {
-    throw new Error("Method not implemented.");
+    return this._rep.getAirports().add(new Airport(item));
   }
   put(item: any) {
-    throw new Error("Method not implemented.");
+    return this._rep.getAirports().update(item);
   }
 }
