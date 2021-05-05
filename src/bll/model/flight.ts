@@ -75,6 +75,8 @@ export class Flight extends Identifiable {
     return this._arrival;
   }
 
+  update(flight) {}
+
   private estimatedDurationInMilliseconds() {
     return (
       this._arrivalDate.getTime() -

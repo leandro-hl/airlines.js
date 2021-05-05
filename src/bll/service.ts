@@ -5,28 +5,25 @@ export class Service {
 
   flightOccupiedCapacity(p: { airlineId: number; flightId: number }) {
     return this._rep
-      .getAirlinesRegistry()
-      .getAirlineBy(p.airlineId)
+      .getAirlines()
+      .getBy(p.airlineId)
       .getFlightBy(p.flightId)
       .getOccupiedCapacity();
   }
 
   estimatedFlightDuration(p: { airlineId: number; flightId: number }) {
     return this._rep
-      .getAirlinesRegistry()
-      .getAirlineBy(p.airlineId)
+      .getAirlines()
+      .getBy(p.airlineId)
       .getFlightBy(p.flightId)
       .getEstimatedDuration();
   }
 
   movementsCountOnDay(input: { airPortId: number; day: Date }) {
-    return this._rep
-      .getAirportsRegistry()
-      .getAirportBy(input.airPortId)
-      .getMovementsCountOn(input.day);
+    return this._rep.getAirports().getBy(input.airPortId).getMovementsCountOn(input.day);
   }
 
   busierAirlineIn(input: { month: number; year: number }) {
-    return this._rep.getAirlinesRegistry().getBusierAirlineIn(input.month, input.year);
+    return this._rep.getAirlines().getBusierAirlineIn(input.month, input.year);
   }
 }

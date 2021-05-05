@@ -34,16 +34,16 @@ app.get("/", (req, res, next) => {
   res.send("I'm fucking alive");
 });
 
-app.use("/airports", generateRestAPI(new AirportsRestService()));
-app.use("/airlines", generateRestAPI(new AirlinesRestService()));
-app.use("/flights", generateRestAPI(new FlightsRestService()));
-app.use("/planes", generateRestAPI(new PlanesRestService()));
+app.use("/airports", generateRestAPI(new AirportsRestService(repository)));
+app.use("/airlines", generateRestAPI(new AirlinesRestService(repository)));
+app.use("/flights", generateRestAPI(new FlightsRestService(repository)));
+app.use("/planes", generateRestAPI(new PlanesRestService(repository)));
 
-// app.post("/airlines/:month/:year/busier", (req, res, next) => {
+// app.post("/statistics/airlines/:month/:year/busier", (req, res, next) => {
 //   res.send(service.busierAirlineIn({ month: +req.params.month, year: +req.params.year }));
 // });
 
-// app.get("/airlines/:airline/flights/:flight/occupation", (req, res, next) => {
+// app.get("/statistics/airlines/:airline/flights/:flight/occupation", (req, res, next) => {
 //   res.send(
 //     service.flightOccupiedCapacity({
 //       airlineId: +req.params.airline,
@@ -52,7 +52,7 @@ app.use("/planes", generateRestAPI(new PlanesRestService()));
 //   );
 // });
 
-// app.get("/airlines/:airline/flights/:flight/duration", (req, res, next) => {
+// app.get("/statistics/airlines/:airline/flights/:flight/duration", (req, res, next) => {
 //   res.send(
 //     service.estimatedFlightDuration({
 //       airlineId: +req.params.airline,
@@ -61,7 +61,7 @@ app.use("/planes", generateRestAPI(new PlanesRestService()));
 //   );
 // });
 
-// app.get("/airports/:airport/:date/movements-count", (req, res, next) => {
+// app.get("/statistics/airports/:airport/:date/movements-count", (req, res, next) => {
 //   res.send(
 //     service.movementsCountOnDay({
 //       airPortId: +req.params.airport,

@@ -6,10 +6,15 @@ export class Airport extends Identifiable implements Scale {
   private _flights: Array<Flight> = [];
   private _estimatedArrivalWaitingTimeInMinutes: number = 0;
 
-  constructor(p?: { estimatedArrivalWaitingTimeInMinutes: number }) {
+  constructor(p?: { name?: string; estimatedArrivalWaitingTimeInMinutes?: number }) {
     super();
 
     this._estimatedArrivalWaitingTimeInMinutes = p?.estimatedArrivalWaitingTimeInMinutes;
+    this._name = p?.name;
+  }
+
+  getName() {
+    return this._name;
   }
 
   addFlight(flight: Flight, isArrival: boolean) {
@@ -49,4 +54,6 @@ export class Airport extends Identifiable implements Scale {
   getPassengerDeparturesCountOn(day: Date) {}
 
   getPassengerArrivalsCountOn(day: Date) {}
+
+  update(airport) {}
 }

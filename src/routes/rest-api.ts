@@ -1,18 +1,18 @@
 import express from "express";
 import { RestService } from "../bll/rest-service";
 
-const generateRestAPI = ({ getAll, get, post, put }: RestService<any>) => {
+const generateRestAPI = (service: RestService<any>) => {
   const route = express.Router();
 
   route
     .route("/")
     .get(async (req, res, next) => {
-      const items = await getAll();
+      const items = await service.getAll();
 
       res.send(items);
     })
     .post(async (req, res, next) => {
-      const id = await post(req.body);
+      const id = await service.post(req.body);
 
       res.send({ id: id });
     });
@@ -20,12 +20,12 @@ const generateRestAPI = ({ getAll, get, post, put }: RestService<any>) => {
   route
     .route("/:id")
     .get(async (req, res, next) => {
-      const item = await get(+req.params.id);
+      const item = await service.get(+req.params.id);
 
       res.send(item);
     })
     .put(async (req, res, next) => {
-      const id = await put(req.body);
+      const id = await service.put(req.body);
 
       res.send({ id: id });
     });
