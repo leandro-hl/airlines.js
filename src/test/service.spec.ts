@@ -5,9 +5,9 @@ import "../core/extension_methods/Moment";
 import { expect } from "chai";
 import {
   Airline,
-  AirlinesRegistry,
+  Airlines,
   Airport,
-  AirportsRegistry,
+  Airports,
   Flight,
   IdGenerator,
   Passenger,
@@ -61,9 +61,9 @@ describe("service", () => {
 
       const airline2 = new Airline([flight21]);
 
-      const registry = new AirlinesRegistry([airline1, airline2]);
+      const registry = new Airlines([airline1, airline2]);
 
-      const repository = new Repository().setAirlinesRegistry(registry);
+      const repository = new Repository().setAirlines(registry);
 
       //Act
       const result = new Service(repository).flightOccupiedCapacity({
@@ -107,9 +107,9 @@ describe("service", () => {
 
       const airline1 = new Airline([flight11]);
 
-      const registry = new AirlinesRegistry([airline1]);
+      const registry = new Airlines([airline1]);
 
-      const repository = new Repository().setAirlinesRegistry(registry);
+      const repository = new Repository().setAirlines(registry);
 
       //Act
       const result = new Service(repository).estimatedFlightDuration({
@@ -191,9 +191,9 @@ describe("service", () => {
           false
         );
 
-      const airportsRegistry = new AirportsRegistry([airport1, airport2]);
+      const airportsRegistry = new Airports([airport1, airport2]);
 
-      const repository = new Repository().setAirportsRegistry(airportsRegistry);
+      const repository = new Repository().setAirports(airportsRegistry);
 
       //Act
       const result = new Service(repository).movementsCountOnDay({
@@ -256,9 +256,9 @@ describe("service", () => {
 
       const airline2 = new Airline([flight21, flight22]);
 
-      const registry = new AirlinesRegistry([airline1, airline2]);
+      const registry = new Airlines([airline1, airline2]);
 
-      const repository = new Repository().setAirlinesRegistry(registry);
+      const repository = new Repository().setAirlines(registry);
 
       //Act
       const result = new Service(repository).busierAirlineIn({ month, year });
