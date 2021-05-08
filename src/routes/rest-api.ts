@@ -17,6 +17,10 @@ const generateRestAPI = (service: RestService<any>) => {
       res.send({ id: id });
     });
 
+  route.route("/options").get(async (req, res, next) => {
+    res.send(await service.options());
+  });
+
   route
     .route("/:id")
     .get(async (req, res, next) => {

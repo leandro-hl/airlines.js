@@ -1,8 +1,12 @@
 import { Repository } from "../moduleManager";
-import { RestService } from "./rest-service";
+import { RestService, Option } from "./rest-service";
 
 export class PlanesRestService implements RestService<any> {
   constructor(private _rep: Repository) {}
+
+  options(): Option[] {
+    throw new Error("Method not implemented.");
+  }
   getAll() {
     throw new Error("Method not implemented.");
   }

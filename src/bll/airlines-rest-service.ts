@@ -1,8 +1,12 @@
 import { Repository, Airline } from "../moduleManager";
-import { RestService } from "./rest-service";
+import { RestService, Option } from "./rest-service";
 
 export class AirlinesRestService implements RestService<any> {
   constructor(private _rep: Repository) {}
+
+  options(): Option[] {
+    throw new Error("Method not implemented.");
+  }
 
   getAll() {
     return this._rep.getAirlines().getAll();
