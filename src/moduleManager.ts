@@ -18,6 +18,13 @@ export * from "./bll/model/scale";
 export * from "./core/identifierGenerator";
 
 //services
-export * from "./core/repository";
+//export * from "./core/repository";
 export * from "./core/bootstrapper";
 export * from "./bll/service";
+
+//dal
+export * from "./dal/repository";
+export * from "./dal/airlines-repository";
+export * from "./dal/airports-repository";
+export * from "./dal/planes-repository";
+export * from "./dal/flights-repository";

@@ -1,35 +1,22 @@
-import { Repository } from "../moduleManager";
+import { PlanesRepository } from "../moduleManager";
 import { RestService, Option } from "./rest-service";
 
 export class PlanesRestService implements RestService<any> {
-  constructor(private _rep: Repository) {}
+  constructor(private _rep: PlanesRepository) {}
 
   options(): Option[] {
     throw new Error("Method not implemented.");
   }
   getAll() {
-    throw new Error("Method not implemented.");
+    return this._rep.getAll();
   }
   get(id: number) {
-    throw new Error("Method not implemented.");
+    return this._rep.getBy(id);
   }
   post(item: any) {
-    throw new Error("Method not implemented.");
+    return this._rep.insert(item.name);
   }
   put(item: any) {
-    throw new Error("Method not implemented.");
+    return this._rep.update(item);
   }
-
-  // getAll() {
-  //   return this._rep.getPlanesRegistry().getAll();
-  // }
-  // get(id: number) {
-  //   return this._rep.getPlanesRegistry().getBy(id);
-  // }
-  // post(item: any) {
-  //   return this._rep.getPlanesRegistry().add(item);
-  // }
-  // put(item: any) {
-  //   return this._rep.getPlanesRegistry().update(item);
-  // }
 }

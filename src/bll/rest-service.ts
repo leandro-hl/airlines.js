@@ -8,5 +8,5 @@ export interface RestService<T> {
   get(id: number);
   post(item: T);
   put(item: T);
-  options(): Option[];
+  options(): Option[] | Promise<Option[]>;
 }

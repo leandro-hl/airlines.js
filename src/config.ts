@@ -4,5 +4,6 @@ dotenv.config();
 
 const port = process.env.PORT;
 const host = process.env.HOST;
+const database = process.env.DATABASE;
 
-export { host, port };
+export { host, port, database };
