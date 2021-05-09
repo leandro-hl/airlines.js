@@ -1,8 +1,8 @@
 CREATE OR REPLACE FUNCTION fn_flights_insert(
     p_departure INT,
-    p_departureDate TIMESTAMP,
+    p_departureDate VARCHAR(20),
     p_arrival INT,
-    p_arrivalDate TIMESTAMP,
+    p_arrivalDate VARCHAR(20),
     p_plane INT,
     p_seatsOffered INT,
     p_airline INT,
@@ -21,9 +21,9 @@ BEGIN
     )	 
     VALUES (
         p_departure,
-        p_departureDate,
+        fn_timestamp_notz(p_departureDate),
         p_arrival,
-        p_arrivalDate,
+        fn_timestamp_notz(p_arrivalDate),
         p_plane,
         p_seatsOffered,
         p_airline) 
