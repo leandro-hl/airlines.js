@@ -35,8 +35,8 @@ CREATE TABLE IF NOT EXISTS flight_passengers (
     id_passenger INT NOT NULL); 
 
 
-ALTER TABLE flights ADD CONSTRAINT FK_departure FOREIGN KEY(departure) REFERENCES flights(id);
-ALTER TABLE flights ADD CONSTRAINT FK_arrival FOREIGN KEY(arrival) REFERENCES flights(id);
+ALTER TABLE flights ADD CONSTRAINT FK_departure FOREIGN KEY(departure) REFERENCES airports(id);
+ALTER TABLE flights ADD CONSTRAINT FK_arrival FOREIGN KEY(arrival) REFERENCES airports(id);
 ALTER TABLE flights ADD CONSTRAINT FK_plane FOREIGN KEY(plane) REFERENCES planes(id);
 ALTER TABLE flights ADD CONSTRAINT FK_airline FOREIGN KEY(airline) REFERENCES airlines(id);
 
