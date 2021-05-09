@@ -18,6 +18,9 @@ export * from "./bll/model/scale";
 export * from "./core/identifierGenerator";
 
 //bll
+export * from "./bll/dtos/option";
+
+export * from "./bll/rest-service";
 export * from "./bll/airlines-rest-service";
 export * from "./bll/airports-rest-service";
 export * from "./bll/planes-rest-service";
