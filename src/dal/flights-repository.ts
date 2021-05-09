@@ -2,52 +2,52 @@ import { Repository } from "../moduleManager";
 
 export class FlightsRepository extends Repository {
   insert({
-    departure,
+    departureId,
     departureDate,
-    arrival,
+    arrivalId,
     arrivalDate,
-    plane,
+    planeId,
     seatsOffered,
-    airline
+    airlineId
   }) {
-    return this.exec("fn_flights_insert", [
-      departure,
+    return this.execScalarId("fn_flights_insert", [
+      departureId,
       departureDate,
-      arrival,
+      arrivalId,
       arrivalDate,
-      plane,
+      planeId,
       seatsOffered,
-      airline
+      airlineId
     ]);
   }
 
   getAll() {
-    return this.query("flights_view");
+    return this.query("SELECT * FROM flights_view");
   }
 
   update({
     id,
-    departure,
+    departureId,
     departureDate,
-    arrival,
+    arrivalId,
     arrivalDate,
-    plane,
+    planeId,
     seatsOffered,
-    airline
+    airlineId
   }) {
-    this.exec("fn_flights_update", [
+    return this.execScalarId("fn_flights_update", [
       id,
-      departure,
+      departureId,
       departureDate,
-      arrival,
+      arrivalId,
       arrivalDate,
-      plane,
+      planeId,
       seatsOffered,
-      airline
+      airlineId
     ]);
   }
 
   getBy(id: number) {
-    return this.exec("fn_flights_getby_id", [id]);
+    return this.execSingle("fn_flights_getby_id", [id]);
   }
 }
