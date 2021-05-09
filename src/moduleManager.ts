@@ -17,10 +17,11 @@ export * from "./bll/model/scale";
 
 export * from "./core/identifierGenerator";
 
-//services
-//export * from "./core/repository";
-export * from "./core/bootstrapper";
-export * from "./bll/service";
+//bll
+export * from "./bll/airlines-rest-service";
+export * from "./bll/airports-rest-service";
+export * from "./bll/planes-rest-service";
+export * from "./bll/flights-rest-service";
 
 //dal
 export * from "./dal/repository";
