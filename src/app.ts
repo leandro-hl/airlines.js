@@ -5,19 +5,19 @@ import "./core/extension_methods/Moment";
 import express from "express";
 import { host, port as port } from "./config";
 import { handleError } from "error-api.hl";
-import { BootsTrapper, Service } from "./moduleManager";
 import { generateRestAPI } from "./routes/rest-api";
-import { AirportsRestService } from "./bll/airports-rest-service";
-import { AirlinesRestService } from "./bll/airlines-rest-service";
-import { FlightsRestService } from "./bll/flights-rest-service";
-import { PlanesRestService } from "./bll/planes-rest-service";
+import {
+  PlanesRepository,
+  FlightsRepository,
+  AirlinesRepository,
+  AirportsRepository,
+  PlanesRestService,
+  FlightsRestService,
+  AirportsRestService,
+  AirlinesRestService
+} from "./moduleManager";
 
 const app = express();
-const bootstrapper = new BootsTrapper();
-
-// One repo and service for all endpoints. Race condition?
-const repository = bootstrapper.createRepository();
-const service = new Service(repository);
 
 app.use(express.json());
 app.use((req, res, next) => {
@@ -29,15 +29,31 @@ app.use((req, res, next) => {
   );
   next();
 });
+app.use((req, res, next) => {
+  const setValue = val => {
+    if (!val) {
+      return null;
+    } else if (isNaN(+val)) {
+      return val;
+    } else {
+      return +val;
+    }
+  };
+
+  Object.keys(req.params).forEach(p => (req.params[p] = setValue(req.params[p])));
+  Object.keys(req.body).forEach(p => (req.body[p] = setValue(req.body[p])));
+
+  next();
+});
 
 app.get("/", (req, res, next) => {
   res.send("I'm fucking alive");
 });
 
-app.use("/airports", generateRestAPI(new AirportsRestService(repository)));
-app.use("/airlines", generateRestAPI(new AirlinesRestService(repository)));
-app.use("/flights", generateRestAPI(new FlightsRestService(repository)));
-app.use("/planes", generateRestAPI(new PlanesRestService(repository)));
+app.use("/airports", generateRestAPI(new AirportsRestService(new AirportsRepository())));
+app.use("/airlines", generateRestAPI(new AirlinesRestService(new AirlinesRepository())));
+app.use("/flights", generateRestAPI(new FlightsRestService(new FlightsRepository())));
+app.use("/planes", generateRestAPI(new PlanesRestService(new PlanesRepository())));
 
 // app.post("/statistics/airlines/:month/:year/busier", (req, res, next) => {
 //   res.send(service.busierAirlineIn({ month: +req.params.month, year: +req.params.year }));
