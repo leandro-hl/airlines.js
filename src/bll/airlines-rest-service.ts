@@ -1,24 +1,31 @@
-import { Airline, AirlinesRepository } from "../moduleManager";
-import { RestService, Option } from "./rest-service";
+import { buildOptions } from "./bll-functions";
+import { AirlinesRepository, RestService } from "../moduleManager";
 
 export class AirlinesRestService implements RestService<any> {
   constructor(private _rep: AirlinesRepository) {}
 
-  options(): Option[] {
-    throw new Error("Method not implemented.");
+  async options() {
+    return (await this._rep.getAll()).map(x => buildOptions(x.id, x.name));
   }
 
-  getAll() {
-    return this._rep.getAll();
+  async getAll() {
+    return (await this._rep.getAll()).map(x => this.airlineDTO(x));
   }
-  get(id: number) {
-    return this._rep.getBy(id);
+
+  async get(id: number) {
+    return this.airlineDTO(await this._rep.getBy(id));
   }
-  post(item: any) {
-    return this._rep.insert(item.name);
+
+  async post(item: any) {
+    const id = await this._rep.insert(item.name);
+
+    return await this.get(id);
   }
-  put(item: any) {
-    return this._rep.update(item);
+
+  async put(item: any) {
+    const id = await this._rep.update(item);
+
+    return this.airlineDTO(await this._rep.getBy(id));
   }
 
   private airlineDTO(x: any) {
