@@ -1,8 +1,4 @@
-export interface Option {
-  val: number;
-  desc: string;
-}
-
+import { Option } from "../moduleManager";
 export interface RestService<T> {
   getAll();
   get(id: number);
