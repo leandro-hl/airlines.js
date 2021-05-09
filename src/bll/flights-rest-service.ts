@@ -1,5 +1,4 @@
-import { FlightsRepository } from "../moduleManager";
-import { RestService, Option } from "./rest-service";
+import { FlightsRepository, RestService, Option } from "../moduleManager";
 
 export class FlightsRestService implements RestService<any> {
   constructor(private _rep: FlightsRepository) {}
@@ -16,14 +15,16 @@ export class FlightsRestService implements RestService<any> {
     return this.flightDTO(await this._rep.getBy(id));
   }
 
-  post(item: any) {
-    return this._rep.insert(item);
+  async post(item: any) {
+    const id = await this._rep.insert(item);
+
+    return await this.get(id);
   }
 
   async put(item: any) {
     const id = await this._rep.update(item);
 
-    return this.flightDTO(await this._rep.getBy(id));
+    return await this.get(id);
   }
 
   private flightDTO(x) {
