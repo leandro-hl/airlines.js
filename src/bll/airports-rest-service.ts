@@ -1,28 +1,34 @@
-import { Airport, AirportsRepository } from "../moduleManager";
-import { RestService, Option } from "./rest-service";
+import { AirportsRepository, RestService } from "../moduleManager";
+import { buildOptions } from "./bll-functions";
 
 export class AirportsRestService implements RestService<any> {
   constructor(private _rep: AirportsRepository) {}
 
-  async options(): Promise<Option[]> {
-    return (await this._rep.getAll()).map(x => {
-      return { val: x.id, desc: x.name };
-    });
+  async options() {
+    return (await this._rep.getAll()).map(x => buildOptions(x.id, x.name));
   }
 
-  getAll() {
-    return this._rep.getAll();
+  async getAll() {
+    return (await this._rep.getAll()).map(x => this.airportDTO(x));
   }
 
-  get(id: number) {
-    return this._rep.getBy(id);
+  async get(id: number) {
+    return this.airportDTO(await this._rep.getBy(id));
   }
 
-  post(item: any) {
-    return this._rep.insert(item.name);
+  async post(item: any) {
+    const id = await this._rep.insert(item.name);
+
+    return await this.get(id);
   }
 
-  put(item: any) {
-    return this._rep.update(item);
+  async put(item: any) {
+    const id = await this._rep.update(item);
+
+    return await this.get(id);
+  }
+
+  private airportDTO(x: any) {
+    return { id: x.id, name: x.name };
   }
 }
