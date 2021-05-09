@@ -29,9 +29,11 @@ const generateRestAPI = (service: RestService<any>) => {
       res.send(item);
     })
     .put(async (req, res, next) => {
-      const id = await service.put(req.body);
+      const id = +req.params.id;
 
-      res.send({ id: id });
+      const result = await service.put({ id, ...req.body });
+
+      res.send(result);
     });
 
   return route;
