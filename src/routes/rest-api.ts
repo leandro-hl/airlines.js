@@ -12,9 +12,9 @@ const generateRestAPI = (service: RestService<any>) => {
       res.send(items);
     })
     .post(async (req, res, next) => {
-      const id = await service.post(req.body);
+      const result = await service.post(req.body);
 
-      res.send({ id: id });
+      res.send(result);
     });
 
   route.route("/options").get(async (req, res, next) => {
