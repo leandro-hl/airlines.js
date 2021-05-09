@@ -1,16 +1,16 @@
 import { Repository } from "../moduleManager";
 
 export class PlanesRepository extends Repository {
-  insert(name: string) {
-    return this.execScalarId("fn_planes_insert", [name]);
+  insert({ model, seats }) {
+    return this.execScalarId("fn_planes_insert", [model, seats]);
   }
 
   getAll() {
-    return this.query("SELECT id, name FROM planes");
+    return this.query("SELECT id, model, seats FROM planes");
   }
 
-  update({ id, name }) {
-    return this.execScalarId("fn_planes_update", [id, name]);
+  update({ id, model, seats }) {
+    return this.execScalarId("fn_planes_update", [id, model, seats]);
   }
 
   getBy(id: number) {
