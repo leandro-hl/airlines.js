@@ -1,5 +1,4 @@
-import { PlanesRepository } from "../moduleManager";
-import { RestService, Option } from "./rest-service";
+import { PlanesRepository, RestService, Option } from "../moduleManager";
 
 export class PlanesRestService implements RestService<any> {
   constructor(private _rep: PlanesRepository) {}
@@ -7,16 +6,28 @@ export class PlanesRestService implements RestService<any> {
   options(): Option[] {
     throw new Error("Method not implemented.");
   }
-  getAll() {
-    return this._rep.getAll();
+
+  async getAll() {
+    return (await this._rep.getAll()).map(x => this.planeDTO(x));
   }
-  get(id: number) {
-    return this._rep.getBy(id);
+
+  async get(id: number) {
+    return this.planeDTO(await this._rep.getBy(id));
   }
-  post(item: any) {
-    return this._rep.insert(item.name);
+
+  async post(item: any) {
+    const id = await this._rep.insert(item);
+
+    return await this.get(id);
   }
-  put(item: any) {
-    return this._rep.update(item);
+
+  async put(item: any) {
+    const id = await this._rep.update(item);
+
+    return await this.get(id);
+  }
+
+  private planeDTO(x: any) {
+    return { id: x.id, model: x.model, seats: x.seats };
   }
 }
