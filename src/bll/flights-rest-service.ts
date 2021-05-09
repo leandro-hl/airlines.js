@@ -8,19 +8,36 @@ export class FlightsRestService implements RestService<any> {
     throw new Error("Method not implemented.");
   }
 
-  getAll() {
-    return this._rep.getAll();
+  async getAll() {
+    return (await this._rep.getAll()).map(x => this.flightDTO(x));
   }
 
-  get(id: number) {
-    return this._rep.getBy(id);
+  async get(id: number) {
+    return this.flightDTO(await this._rep.getBy(id));
   }
 
   post(item: any) {
     return this._rep.insert(item);
   }
 
-  put(item: any) {
-    return this._rep.update(item);
+  async put(item: any) {
+    const id = await this._rep.update(item);
+
+    return this.flightDTO(await this._rep.getBy(id));
+  }
+
+  private flightDTO(x) {
+    return {
+      id: x.id,
+      departureDate: x.departure_date,
+      departureId: x.departure_id,
+      departure: x.departure_name,
+      arrivalId: x.arrival_id,
+      arrivalDate: x.arrival_date,
+      arrival: x.arrival_name,
+      seatsOffered: x.seats_offered,
+      airlineId: x.airline_id,
+      airlineName: x.airline_name
+    };
   }
 }
