@@ -1,34 +1,17 @@
-export * from "./core/identifiable";
+export * from "./identifiable";
 
 //models
-export * from "./bll/model/airline";
-export * from "./bll/model/airlines";
+export * from "./model/airline";
+export * from "./model/airlines";
 
-export * from "./bll/model/passenger";
-export * from "./bll/model/plane";
+export * from "./model/passenger";
+export * from "./model/plane";
 
-export * from "./bll/model/flight";
-export * from "./bll/model/flights";
+export * from "./model/flight";
+export * from "./model/flights";
 
-export * from "./bll/model/airport";
-export * from "./bll/model/airports";
+export * from "./model/airport";
+export * from "./model/airports";
 
-export * from "./bll/model/scale";
-
-export * from "./core/identifierGenerator";
-
-//bll
-export * from "./bll/dtos/option";
-
-export * from "./bll/rest-service";
-export * from "./bll/airlines-rest-service";
-export * from "./bll/airports-rest-service";
-export * from "./bll/planes-rest-service";
-export * from "./bll/flights-rest-service";
-
-//dal
-export * from "./dal/repository";
-export * from "./dal/airlines-repository";
-export * from "./dal/airports-repository";
-export * from "./dal/planes-repository";
-export * from "./dal/flights-repository";
+export * from "./model/scale";
+export * from "./identifierGenerator";

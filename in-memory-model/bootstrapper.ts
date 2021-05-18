@@ -1,4 +1,4 @@
-import { Repository } from "../moduleManager";
+import { Repository } from "./repository";
 
 export class BootsTrapper {
   createRepository() {

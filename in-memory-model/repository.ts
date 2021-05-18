@@ -1,4 +1,4 @@
-import { Airlines, Airports, Flights } from "../moduleManager";
+import { Airlines, Airports, Flights } from "./moduleManager";
 
 export class Repository {
   private _airlines: Airlines;
