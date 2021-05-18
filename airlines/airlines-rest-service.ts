@@ -1,5 +1,5 @@
-import { buildOptions } from "./bll-functions";
-import { AirlinesRepository, RestService } from "../moduleManager";
+import { RestService, buildOptions } from "rest-api.hl";
+import { AirlinesRepository } from "./airlines-repository";
 
 export class AirlinesRestService implements RestService<any> {
   constructor(private _rep: AirlinesRepository) {}

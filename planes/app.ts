@@ -1,15 +1,9 @@
-import "./core/extension_methods/String";
-import "./core/extension_methods/Number";
-import "./core/extension_methods/Moment";
-
 import express from "express";
 import { host, port as port } from "./config";
 import { handleError } from "error-api.hl";
-import { generateRestAPI } from "./routes/rest-api";
-import {
-  PlanesRepository,
-  PlanesRestService
-} from "./moduleManager";
+import { generateRestAPI } from "rest-api.hl";
+import { PlanesRestService } from "./planes-rest-service";
+import { PlanesRepository } from "./planes-repository";
 
 const app = express();
 
@@ -40,7 +34,10 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/api/v1/planes", generateRestAPI(new PlanesRestService(new PlanesRepository())));
+app.use(
+  "/api/v1/planes",
+  generateRestAPI(new PlanesRestService(new PlanesRepository("uri")))
+);
 
 // Error handling middleware, we delegate the handling to the centralized error handler
 app.use(async (err: Error, req, res, next) => {

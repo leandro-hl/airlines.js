@@ -1,5 +1,4 @@
-import { Repository } from "../moduleManager";
-
+import { Repository } from "data.hl";
 export class AirlinesRepository extends Repository {
   insert(name: string) {
     return this.execScalarId("fn_airlines_insert", [name]);

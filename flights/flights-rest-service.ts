@@ -1,4 +1,5 @@
-import { FlightsRepository, RestService, Option } from "../moduleManager";
+import { RestService, Option } from "rest-api.hl";
+import { FlightsRepository } from "./flights-repository";
 
 export class FlightsRestService implements RestService<any> {
   constructor(private _rep: FlightsRepository) {}

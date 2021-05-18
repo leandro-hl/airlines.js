@@ -1,4 +1,5 @@
-import { PlanesRepository, RestService, Option } from "../moduleManager";
+import { RestService, Option } from "rest-api.hl";
+import { PlanesRepository } from "./planes-repository";
 
 export class PlanesRestService implements RestService<any> {
   constructor(private _rep: PlanesRepository) {}

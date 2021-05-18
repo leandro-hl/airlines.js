@@ -1,21 +1,9 @@
-import "./core/extension_methods/String";
-import "./core/extension_methods/Number";
-import "./core/extension_methods/Moment";
-
 import express from "express";
 import { host, port as port } from "./config";
 import { handleError } from "error-api.hl";
-import { generateRestAPI } from "./routes/rest-api";
-import {
-  PlanesRepository,
-  FlightsRepository,
-  AirlinesRepository,
-  AirportsRepository,
-  PlanesRestService,
-  FlightsRestService,
-  AirportsRestService,
-  AirlinesRestService
-} from "./moduleManager";
+import { generateRestAPI } from "rest-api.hl";
+import { FlightsRestService } from "./flights-rest-service";
+import { FlightsRepository } from "./flights-repository";
 
 const app = express();
 
@@ -51,49 +39,9 @@ app.get("/", (req, res, next) => {
 });
 
 app.use(
-  "/api/v1/airports",
-  generateRestAPI(new AirportsRestService(new AirportsRepository()))
-);
-app.use(
-  "/api/v1/airlines",
-  generateRestAPI(new AirlinesRestService(new AirlinesRepository()))
-);
-app.use(
   "/api/v1/flights",
-  generateRestAPI(new FlightsRestService(new FlightsRepository()))
+  generateRestAPI(new FlightsRestService(new FlightsRepository("uri")))
 );
-app.use("/api/v1/planes", generateRestAPI(new PlanesRestService(new PlanesRepository())));
-
-// app.post("/statistics/airlines/:month/:year/busier", (req, res, next) => {
-//   res.send(service.busierAirlineIn({ month: +req.params.month, year: +req.params.year }));
-// });
-
-// app.get("/statistics/airlines/:airline/flights/:flight/occupation", (req, res, next) => {
-//   res.send(
-//     service.flightOccupiedCapacity({
-//       airlineId: +req.params.airline,
-//       flightId: +req.params.flight
-//     })
-//   );
-// });
-
-// app.get("/statistics/airlines/:airline/flights/:flight/duration", (req, res, next) => {
-//   res.send(
-//     service.estimatedFlightDuration({
-//       airlineId: +req.params.airline,
-//       flightId: +req.params.flight
-//     })
-//   );
-// });
-
-// app.get("/statistics/airports/:airport/:date/movements-count", (req, res, next) => {
-//   res.send(
-//     service.movementsCountOnDay({
-//       airPortId: +req.params.airport,
-//       day: new Date(req.params.date)
-//     })
-//   );
-// });
 
 // Error handling middleware, we delegate the handling to the centralized error handler
 app.use(async (err: Error, req, res, next) => {

@@ -1,4 +1,4 @@
-import { Repository } from "../moduleManager";
+import { Repository } from "data.hl";
 
 export class AirportsRepository extends Repository {
   insert(name: string) {

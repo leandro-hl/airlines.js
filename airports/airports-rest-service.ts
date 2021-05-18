@@ -1,5 +1,5 @@
-import { AirportsRepository, RestService } from "../moduleManager";
-import { buildOptions } from "./bll-functions";
+import { buildOptions, RestService } from "rest-api.hl";
+import { AirportsRepository } from "./airports-repository";
 
 export class AirportsRestService implements RestService<any> {
   constructor(private _rep: AirportsRepository) {}
