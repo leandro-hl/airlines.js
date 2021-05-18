@@ -1,12 +1,13 @@
 FROM node:latest
 
-COPY . /src
-
 WORKDIR /src
 
-RUN npm i --production
-RUN npm run build
+COPY package*.json ./
 
-EXPOSE 3001
+RUN npm ci
+
+COPY . .
+
+RUN npm run build
 
 CMD npm start

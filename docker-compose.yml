@@ -1,0 +1,29 @@
+version: "3.3"
+services:
+  airlines:
+    build: "./airlines"
+    ports:
+      - "3000:3000"
+    environment:
+      PORT: 3000
+
+  airports:
+    build: "./airports"
+    ports:
+      - "3001:3000"
+    environment:
+      PORT: 3001
+
+  flights:
+    build: "./flights"
+    ports:
+      - "3002:3000"
+    environment:
+      PORT: 3002
+
+  planes:
+    build: "./planes"
+    ports:
+      - "3003:3000"
+    environment:
+      PORT: 3003
