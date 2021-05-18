@@ -1,7 +1,7 @@
 import express from "express";
 import { RestService } from "../bll/rest-service";
 
-const generateRestAPI = (service: RestService<any>) => {
+const generateRestAPI = <T>(service: RestService<T>) => {
   const route = express.Router();
 
   route

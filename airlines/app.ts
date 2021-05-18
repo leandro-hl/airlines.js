@@ -50,10 +50,19 @@ app.get("/", (req, res, next) => {
   res.send("I'm fucking alive");
 });
 
-app.use("/airports", generateRestAPI(new AirportsRestService(new AirportsRepository())));
-app.use("/airlines", generateRestAPI(new AirlinesRestService(new AirlinesRepository())));
-app.use("/flights", generateRestAPI(new FlightsRestService(new FlightsRepository())));
-app.use("/planes", generateRestAPI(new PlanesRestService(new PlanesRepository())));
+app.use(
+  "/api/v1/airports",
+  generateRestAPI(new AirportsRestService(new AirportsRepository()))
+);
+app.use(
+  "/api/v1/airlines",
+  generateRestAPI(new AirlinesRestService(new AirlinesRepository()))
+);
+app.use(
+  "/api/v1/flights",
+  generateRestAPI(new FlightsRestService(new FlightsRepository()))
+);
+app.use("/api/v1/planes", generateRestAPI(new PlanesRestService(new PlanesRepository())));
 
 // app.post("/statistics/airlines/:month/:year/busier", (req, res, next) => {
 //   res.send(service.busierAirlineIn({ month: +req.params.month, year: +req.params.year }));
