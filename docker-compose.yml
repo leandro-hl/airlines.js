@@ -3,27 +3,27 @@ services:
   airlines:
     build: "./airlines"
     ports:
-      - "3000:3000"
+      - "3000:3001"
     environment:
-      PORT: 3000
+      PORT: 3001
 
   airports:
     build: "./airports"
     ports:
-      - "3001:3000"
+      - "3001:3002"
     environment:
-      PORT: 3001
+      PORT: 3002
 
   flights:
     build: "./flights"
     ports:
-      - "3002:3000"
+      - "3002:3003"
     environment:
-      PORT: 3002
+      PORT: 3003
 
   planes:
     build: "./planes"
     ports:
-      - "3003:3000"
+      - "3003:3004"
     environment:
-      PORT: 3003
+      PORT: 3004
